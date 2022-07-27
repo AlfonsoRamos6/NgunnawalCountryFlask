@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ngunnawal Country Website</title>
+    <link rel="stylesheet" href="ngunnawalnew.css">
+
+
+</head>
+<body>
+
+<!-- This is the navbar -->
+<div class="navbar">
+    <img src="images/logo.png" style="width:150px;height:150px;" >
+    <a href="ngunnawal.html">Home</a>
+    <a href="history.html">History</a>
+    <img src="images/Banner.png" style="width:520px; height:145px;" >
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact Us</a>
+
+    <div id="container">
+        <div id="label">Search 🔎</div>
+    </div>
+</div class>
+
+    <form onsubmit="return false">
+        <p>
+            <label for="first">First Name</label>
+            <input type='text' id="first" name='first'>
+        </p>
+        <br>
+        <p>
+            <label for="last">Last Name</label>
+            <input type='text' id="last" name='last'>
+        </p>
+        <br>
+        <p>
+            <label for="age">Enter Age</label>
+            <input type='number' id="age" name='age'>
+        </p>
+        <br>
+        <p>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail" name="user_email">
+        </p>
+        <br>
+        <p>
+            <label for="country">Country</label>
+            <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+        </p>
+        <button onclick="authentication(this.form)">Log In</button>
+    </form>
+
+</form>
+
+    <html>
+
+        <div class="footer">
+            <p>Author: Alfonso Ramos<br>
+                <a href="mailto:hege@example.com">0257621@schoolsnet.act.edu.au</a></p>
+        </div>
+
+        <style>
+            .footer {
+                position: absolute;
+                left: 0;
+                bottom: -100%;
+                width: 100%;
+                border: 3px solid darkred;
+                background-color: antiquewhite;
+                color: black;
+                text-align: center;
+            }
+        </style>
+
+
+    </body>
+    </html>
+
+
+</body>
+</html>
