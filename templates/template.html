@@ -14,38 +14,58 @@
 </head>
 <body>
 
-<!-- This is the navbar -->
-<div class="navbar">
-    <img src="/static/images/logo.png" style="width:150px;height:150px;" >
-    <a href="ngunnawal.html">Home</a>
-    <a href="history.html">History</a>
-    <img src="/static/images/Banner.png" style="width:520px; height:145px;" >
-    <a href="gallery.html">Gallery</a>
-    <a href="contact.html">Contact Us</a>
 
-    <div id="container">
-        <div id="label">Search 🔎</div>
+<img src="/static/images/banner.png" class="center">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+      <img src="/static/images/logo.png">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
     </div>
-</div class>
+  </div>
+</nav>
 
 
-<div class="grid-container"> <!-- Overall Layout -->
-    <div class="full-width">
+<div class="container-fluid"> <!-- Overall Layout -->
+<div class="row">
+    <div class="col">
         <p style="color:red;font-size:46px;text-align:center"
         <h1>{{ title }}</h1>
+        </div>
     </div>
-    <div class="main-content center">
-        <!--Cell 1-->
+<div class="row">
+    <div class="col-4">
         {% block cellContent1 %} {% endblock %}
     </div>
-    <div class="full-width">
-        <!--Cell 2-->
-        {% block cellContent2 %} {% endblock %}
+<div class="col-8">
+    {% block cellContent2 %} {% endblock %}
     </div>
-    <div class="full-width">
-        <!--Cell 3-->
+</div>
+<div class="row">
+    <div class="col text-highlighting">
         {% block cellContent3 %} {% endblock %}
     </div>
+</div>
+
+
 </divclass>
 
     <html>
