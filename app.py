@@ -12,3 +12,11 @@ db = SQLAlchemy(app)            # creates the db object using the configuration
 @app.route ('/')
 def homepage(): #put application's code here
     return render_template("index.html", title="Ngunnawal Country")
+
+from models import Contact
+from forms import ContactForm
+
+@app.route("/contact.html", methods=["POST", "GET"])
+def contact():
+    form = ContactForm()
+    return render_template("contact.html", title ="Contact Us", form=form)
