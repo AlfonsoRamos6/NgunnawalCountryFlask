@@ -5,58 +5,60 @@
     <title>{{ title}}</title>
     <link rel="stylesheet" href="/static/ngunnawalnew.css">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
-<script> src="/static/js/bootstrap.bundle.js></script>
+    <script src="/static/js/bootstrap.bundle.js"></script>
     {% block pageStyle %}
     {% endblock %}
 <style>
 
+
 </style>
 </head>
-<body>
+
+    <a href="contact.html">Contact Us</a>
 
 
 <img src="/static/images/banner.png" class="center">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-      <img src="/static/images/logo.png">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <img src="/static/images/logo.png">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 
 
-<div class="container-fluid"> <!-- Overall Layout -->
+<!-- Overall Layout -->
 <div class="row">
     <div class="col">
-        <p style="color:red;font-size:46px;text-align:center"
+        <p> style="color:red;font-size:46px;text-align:center"</p>
         <h1>{{ title }}</h1>
-        </div>
     </div>
+</div>
 <div class="row">
     <div class="col-4">
         {% block cellContent1 %} {% endblock %}
     </div>
-<div class="col-8">
-    {% block cellContent2 %} {% endblock %}
+    <div class="col-8">
+        {% block cellContent2 %} {% endblock %}
     </div>
 </div>
 <div class="row">
@@ -68,29 +70,26 @@
 
 </divclass>
 
-    <html>
+<html>
 
-        <div class="footer">
-            <p>Author: Alfonso Ramos<br>
-                <a href="mailto:hege@example.com">0257621@schoolsnet.act.edu.au</a></p>
-        </div>
+<div class="footer">
+    <p>Author: Alfonso Ramos<br>
+        <a href="mailto:hege@example.com">0257621@schoolsnet.act.edu.au</a></p>
+</div>
 
-        <style>
-            .footer {
-                position: absolute;
-                left: 0;
-                bottom: -100%;
-                width: 100%;
-                border: 3px solid darkred;
-                background-color: antiquewhite;
-                color: black;
-                text-align: center;
-            }
-        </style>
-
-
-    </body>
-    </html>
+<style>
+    .footer {
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        width: 100%;
+        border: 3px solid darkred;
+        background-color: antiquewhite;
+        color: black;
+        text-align: center;
+    }
+</style>
+</html>
 
 
 </body>
