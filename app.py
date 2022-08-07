@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
@@ -11,6 +11,7 @@ db = SQLAlchemy(app)  # creates the db object using the configuration
 from models import Contact
 from forms import ContactForm
 
+from models import insults, todo
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -26,5 +27,17 @@ def contact():
         db.session.commit()
 
     return render_template("contact.html", title="Contact Us", form=form)
+
+
+@app.route('/todo', methods=["POST", "GET"])
+def view_todo():
+    all_todo = db.session.query(todo).all()
+    if request.method == "POST":
+        new_todo = todo(text=request.form['text'])
+        new_todo.done = False
+        db.session.add(new_todo)
+        db.session.commit()
+        db.session.refresh(new_todo)
+    return render_template("todo.html", todos=all_todo)
 
 
