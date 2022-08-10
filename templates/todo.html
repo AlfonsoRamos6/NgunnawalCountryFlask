@@ -21,9 +21,9 @@
 
         <button type="submit" value="update">Update</button>
     </form>
-<form method="GET" action="/todoedit/{{ todo.id }}">
+    <form method="GET" action="/todoedit/{{ todo.id }}">
             <button type="submit" value="delete">Delete</button>
-        </form>
+    </form>
 {% endfor %}
 {% endblock %}
 
@@ -31,3 +31,4 @@
 {% block cellContent3 %}
     Footer
 {% endblock %}
+
