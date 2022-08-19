@@ -1,0 +1,13 @@
+@startuml NgunnawalWebsite
+left to right direction
+actor "Unregistered User" as unregistered
+actor Administrator as admin
+actor "Registered User" as registered
+
+package NgunnawalWebsite {
+ usecase "User Registration" as UC1
+}
+
+unregistered --> UC1 : Only needed once.
+
+@enduml
