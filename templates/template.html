@@ -42,10 +42,20 @@
                     <a class="nav-link" href="todo.html">To do</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="register">User Registration</a>
+                    <a class="nav-link" href="registration.html">User Registration</a>
                 </li>
+                {% if user.is_anonymous %}
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
+        <div style="color:white">{{ user.name }}</div>
     </div>
 </nav>
 
@@ -75,23 +85,7 @@
 
 <html>
 
-<div class="footer">
-    <p>Author: Alfonso Ramos<br>
-        <a href="mailto:hege@example.com">0257621@schoolsnet.act.edu.au</a></p>
-</div>
 
-<style>
-    .footer {
-        position: absolute;
-        left: 0;
-        bottom: -100%;
-        width: 100%;
-        border: 3px solid darkred;
-        background-color: antiquewhite;
-        color: black;
-        text-align: center;
-    }
-</style>
 </html>
 
 
