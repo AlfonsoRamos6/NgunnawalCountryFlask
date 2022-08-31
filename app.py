@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, LoginManager, logout_user, login_required
-from models import insults, todo, Contact, User
-from forms import ContactForm, RegistrationForm, LoginForm
+
+import random
 
 app = Flask(__name__)
 app.config.from_object(Config)  # loads the configuration for the database
 db = SQLAlchemy(app)  # creates the db object using the configuration
 login = LoginManager(app)
 login.login_view = 'login'
-
+from models import insults, todo, Contact, User
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -83,3 +84,15 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('homepage'))
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+@login_required
+def reset_password():
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=current_user.email_address).first()
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash("Your password has been changed")
+        return redirect(url_for('homepage'))
+    return render_template("passwordreset.html", title='Reset Password', form=form, user=current_user)

@@ -52,16 +52,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Logout</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reset_password">Reset Password</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
         <div style="color:white">{{ user.name }}</div>
     </div>
 </nav>
-
-
-<!-- Overall Layout -->
-<div class="row">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li><div class="focus">{{ message }}</div></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<div class="row">  <!-- Overall Layout -->
     <div class="col">
         <h1>Home</h1>
     </div>
