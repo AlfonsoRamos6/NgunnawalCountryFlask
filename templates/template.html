@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="/static/ngunnawalnew.css">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/bootstrap.bundle.js"></script>
-<style>
+    {% block pageStyle %}
+    {% endblock %}
+    <style>
 
 
-</style>
+    </style>
 </head>
-
-    <a href="contact.html">Contact Us</a>
+<body>
 
 
 <img src="/static/images/banner.png" class="center">
@@ -70,9 +71,14 @@
         </ul>
     {% endif %}
 {% endwith %}
+
 <div class="row">  <!-- Overall Layout -->
     <div class="col">
         <h1>Home</h1>
+        {% block cellContent1 %}
+
+
+            {% endblock %}
     </div>
 </div>
 <div class="row">
@@ -80,11 +86,13 @@
        <h2>Main Content</h2>
     </div>
     <div class="col-8">
+        {% block cellContent2 %} {% endblock %}
         <h3>s</h3>
     </div>
 </div>
 <div class="row">
     <div class="col text-highlighting">
+        {% block cellContent3 %} {% endblock %}
         <h3>Footer</h3>
     </div>
 </div>
