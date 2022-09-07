@@ -96,3 +96,27 @@ def reset_password():
         flash("Your password has been changed")
         return redirect(url_for('homepage'))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=current_user)
+
+
+# Error Handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", user=current_user), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html", user=current_user), 500
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+	return render_template("userProfile.html", title="User Profile", user=current_user)
+
+if form.validate_on_submit():
+	user = User.query.filter_by(email_address=current_user.email_address).first()
+	user.update_details(email_address=form.email_address.data, name=form.name.data)
+	db.session.commit()
+	flash("Your details have been changed")
+	return redirect(url_for("homepage"))
