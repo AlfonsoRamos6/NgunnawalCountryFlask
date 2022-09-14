@@ -120,3 +120,9 @@ if form.validate_on_submit():
 	db.session.commit()
 	flash("Your details have been changed")
 	return redirect(url_for("homepage"))
+
+@app.route('/contact_messages')
+@login_required
+def view_contact_messages():
+    contact_messages = Contact.query.all()
+    return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
