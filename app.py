@@ -1,17 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user, login_user, LoginManager, logout_user, login_required
-
-import random
+from flask_login import current_user, login_user, LoginManager, logout_user, login_required from werkzeug.utils import secure_filename
+import random, os
 
 app = Flask(__name__)
 app.config.from_object(Config)  # loads the configuration for the database
 db = SQLAlchemy(app)  # creates the db object using the configuration
 login = LoginManager(app)
 login.login_view = 'login'
-from models import insults, todo, Contact, User
-from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm
+
+UPLOAD_FOLDER = './static/images/userPhotos/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+from models import insults, todo, Contact, User, Photos
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -129,3 +133,27 @@ def view_contact_messages():
         return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
     else:
         return redirect(url_for("homepage"))
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/userPhotos', methods=['GET', 'POST'])
+@login_required
+def photos():
+    form = PhotoUploadForm()
+    user_images = Photos.query.filter_by(userid=current_user.id).all()
+    if form.validate_on_submit():
+        new_image = form.image.data
+        filename = secure_filename(new_image.filename)
+
+        if new_image and allowed_file(filename):
+            new_image.save(os.path.join(UPLOAD_FOLDER, filename))
+            photo = Photos(title=form.title.data, filename=filename, userid=current_user.id)
+            db.session.add(photo)
+            db.session.commit()
+            flash("Image Uploaded")
+            return redirect(url_for("photos"))
+        else:
+            flash("The File Upload failed.")
+    return render_template("userPhotos.html", title="User Photos", user=current_user, form=form, images=user_images)
