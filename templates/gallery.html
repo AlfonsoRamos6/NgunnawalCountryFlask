@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'template.html' %}
 
-</body>
-</html>
+{# Place the content for the cellContent1 in this block #}
+{% block cellContent1 %}
+    Sidebar
+{% endblock %}
 
+{# Place the content for the cellContent2 in this block #}
+{% block cellContent2 %}
+    <div class="grid-container">
+	  {% for image in images %}
+	      <div>{{ image.title }}<br>
+	          <img src="/static/images/userPhotos/{{ image.filename }}" width="20%"></div>
+	  {% endfor %}
+    </div>
+
+{% endblock %}
+
+{# Place the content for the cellContent3 in this block #}
+{% block cellContent3 %}
+    Footer
+{% endblock %}
