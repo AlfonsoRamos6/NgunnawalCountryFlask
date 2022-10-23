@@ -64,7 +64,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         new_user = User(email_address=form.email_address.data, name=form.name.data,
-                        user_level=1)  # defaults to regular user
+                        user_level=1, active=1)  # defaults to regular user
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
@@ -77,7 +77,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user is None or not user.check_password(form.password.data):
+        if user is None or not user.check_password(form.password.data) or not user.active:
             return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for("homepage"))
@@ -166,3 +166,25 @@ def photos():
 def photo_gallery():
     all_images = Photos.query.all()
     return render_template("gallery.html", title="Photo Gallery", user=current_user, images=all_images)
+
+@app.route('/admin/list_all_users')
+@login_required
+def list_all_users():
+    if current_user.is_admin():
+        all_users = User.query.all()
+        return render_template("listAllUsers.html", title="All Active Users", user=current_user, users=all_users)
+    else:
+        flash("You must be an administrator to access this functionality.")
+        return redirect(url_for("homepage"))
+
+@app.route('/reset_password/<userid>', methods=['GET', 'POST'])
+@login_required
+def reset_user_password(userid):
+    form = ResetPasswordForm()
+    user = User.query.filter_by(id=userid).first()
+    if form.validate_on_submit():
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash('Password has been reset for user {}'.format(user.name))
+        return redirect(url_for('homepage'))
+    return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
