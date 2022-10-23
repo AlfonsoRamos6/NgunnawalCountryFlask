@@ -188,3 +188,11 @@ def reset_user_password(userid):
         flash('Password has been reset for user {}'.format(user.name))
         return redirect(url_for('homepage'))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
+
+@app.route('/admin/user_enable/<userid>')
+@login_required
+def user_enable(userid):
+    user = User.query.filter_by(id=userid).first()
+    user.active = not user.active
+    db.session.commit()
+    return redirect(url_for("list_all_users"))
