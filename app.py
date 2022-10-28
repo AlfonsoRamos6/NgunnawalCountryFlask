@@ -73,7 +73,7 @@ def register():
     return render_template("registration.html", title="User Registration", form=form)
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login.html', methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
