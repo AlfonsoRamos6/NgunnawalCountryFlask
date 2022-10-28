@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user, login_user, LoginManager, logout_user, login_required from werkzeug.utils import secure_filename
+from flask_login import current_user, login_user, LoginManager, logout_user, login_required
+from werkzeug.utils import secure_filename
 import random, os
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 from models import todo, Contact, User, Photos
-from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm, PhotoUploadForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -56,7 +57,7 @@ def contact():
         db.session.add(new_contact)
         db.session.commit()
 
-    return render_template("contact.html", title="Contact Us", form=form, current_user)
+    return render_template("contact.html", title="Contact Us", form=form, user = current_user)
 
 
 @app.route("/register", methods=["GET", "POST"])
