@@ -14,7 +14,7 @@ UPLOAD_FOLDER = './static/images/userPhotos/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-from models import insults, todo, Contact, User, Photos
+from models import todo, Contact, User, Photos
 from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
 
 @app.route('/')
