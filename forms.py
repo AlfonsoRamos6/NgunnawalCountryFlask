@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from wtforms import StringField, SubmitField, IntegerField, PasswordField, FileField from flask_wtf.file import FileRequired
+from wtforms import StringField, SubmitField, IntegerField, PasswordField, FileField
+from flask_wtf.file import FileRequired
 from models import User
 
 class ContactForm(FlaskForm):

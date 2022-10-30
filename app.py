@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user, login_user, LoginManager, logout_user, login_required from werkzeug.utils import secure_filename
+from flask_login import current_user, login_user, LoginManager, logout_user, login_required
+from werkzeug.utils import secure_filename
 import random, os
 
 app = Flask(__name__)
@@ -14,8 +15,8 @@ UPLOAD_FOLDER = './static/images/userPhotos/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-from models import insults, todo, Contact, User, Photos
-from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
+from models import todo, Contact, User, Photos
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm, PhotoUploadForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -56,7 +57,7 @@ def contact():
         db.session.add(new_contact)
         db.session.commit()
 
-    return render_template("contact.html", title="Contact Us", form=form, current_user)
+    return render_template("contact.html", title="Contact Us", form=form, user = current_user)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -72,7 +73,7 @@ def register():
     return render_template("registration.html", title="User Registration", form=form)
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login.html', methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -116,14 +117,15 @@ def internal_server_error(e):
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-	return render_template("userProfile.html", title="User Profile", user=current_user)
+    form = UserProfileForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=current_user.email_address).first()
+        user.update_details(email_address=form.email_address.data, name=form.name.data)
+        db.session.commit()
+        flash("Your details have been changed")
+        return redirect(url_for("homepage"))
+    return render_template("userProfile.html", title="User Profile", user=current_user)
 
-if form.validate_on_submit():
-	user = User.query.filter_by(email_address=current_user.email_address).first()
-	user.update_details(email_address=form.email_address.data, name=form.name.data)
-	db.session.commit()
-	flash("Your details have been changed")
-	return redirect(url_for("homepage"))
 
 @app.route('/contact_messages')
 @login_required
