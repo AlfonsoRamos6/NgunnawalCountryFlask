@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title}}</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/ngunnawalnew.css">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/bootstrap.bundle.js"></script>
@@ -16,13 +16,14 @@
 <body>
 
 
-<img src="/static/images/banner.png" class="center">
+{#<img src="/static/images/banner.png" class="center">#}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <img src="/static/images/logo.png">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -30,51 +31,53 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="history.html">History</a>#}
+{#                </li>#}
                 <li class="nav-item">
-                    <a class="nav-link" href="history.html">History</a>
+                    <a class="nav-link" href="/gallery">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
+                    <a class="nav-link" href="/contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
+                    <a class="nav-link" href="/todo">To do</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="todo.html">To do</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registration.html">User Registration</a>
+                    <a class="nav-link" href="/register">User Registration</a>
                 </li>
                 {% if user.is_anonymous %}
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/userPhotos">Photos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/reset_password">Reset Password</a>
-                </li>
-                {% if user.is_admin() %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Administrator
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item text-dark" href="/contact_messages">Contact Messages</a></li>
-                        <li><a class="dropdown-item text-dark" href="/admin/list_all_users">List all Users</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/userPhotos">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reset_password">Reset Password</a>
+                    </li>
+                    {% if user.is_admin() %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Administrator
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item text-dark" href="/contact_messages">Contact Messages</a>
+                                </li>
+                                <li><a class="dropdown-item text-dark" href="/admin/list_all_users">List all Users</a>
+                                </li>
 
-    </ul>
-</li>
-                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
                 {% endif %}
             </ul>
         </div>
@@ -85,45 +88,60 @@
     {% if messages %}
         <ul class="flashes">
             {% for message in messages %}
-                <li><div class="focus">{{ message }}</div></li>
+                <li>
+                    <div class="focus">{{ message }}</div>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
 {% endwith %}
+{#<div class="container-fluid">#}
+{#    <div class="row">  <!-- Overall Layout -->#}
+{#        <div class="col">#}
+{#            <h1>Home</h1>#}
+{#            {% block cellContent1 %}#}
+{#            {% endblock %}#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{##}
+{#        <div class="col-8">#}
+{#            {% block cellContent2 %} {% endblock %}#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col text-highlighting">#}
+{#            {% block cellContent3 %} {% endblock %}#}
+{#            <h3>Footer</h3>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{#</div>#}
 
-<div class="row">  <!-- Overall Layout -->
-    <div class="col">
-        <h1>Home</h1>
-        {% block cellContent1 %}
+<div class="container-fluid"> <!-- Overall Layout -->
+    <div class="row">
+        <div class="col">
+            <h1 style="text-align: center">{{ title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            {% block cellContent1 %}
 
 
             {% endblock %}
+        </div>
+        <div class="col-8">
+            {% block cellContent2 %} {% endblock %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-highlighting">
+            {% block cellContent3 %} {% endblock %}
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-4">
-       <h2>Main Content</h2>
-    </div>
-    <div class="col-8">
-        {% block cellContent2 %} {% endblock %}
-        <h3>s</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col text-highlighting">
-        {% block cellContent3 %} {% endblock %}
-        <h3>Footer</h3>
-    </div>
-</div>
-
-
-</divclass>
-
-<html>
-
-
-</html>
-
 
 </body>
 </html>
