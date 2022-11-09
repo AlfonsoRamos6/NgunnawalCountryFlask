@@ -49,7 +49,7 @@ def edit_note(todo_id):
     return redirect("/todo", code=302)
 
 
-@app.route("/contact.html", methods=["POST", "GET"])
+@app.route("/contact", methods=["POST", "GET"])
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
@@ -70,7 +70,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("homepage"))
-    return render_template("registration.html", title="User Registration", form=form)
+    return render_template("registration.html", title="User Registration", form=form, user=current_user)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -127,7 +127,7 @@ def profile():
         user.update_details(email_address=form.email_address.data, name=form.name.data)
         db.session.commit()
         flash("Your details have been changed")
-    return render_template("userProfile.html", title="User Profile", user=current_user)
+    return render_template("userProfile.html", title="User Profile", user=current_user, form=form)
 
 
 
@@ -169,7 +169,7 @@ def photos():
             flash("The File Upload failed.")
     return render_template("userPhotos.html", title="User Photos", user=current_user, form=form, images=user_images)
 
-@app.route('/gallery.html')
+@app.route('/gallery')
 def photo_gallery():
     all_images = Photos.query.all()
     return render_template("gallery.html", title="Photo Gallery", user=current_user, images=all_images)
